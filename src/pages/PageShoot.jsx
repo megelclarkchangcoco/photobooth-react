@@ -112,7 +112,7 @@ export function PageShoot({ session, onDone }) {
     const imgs = [];
     try {
       for (let i = 0; i < slotCount; i++) {
-        await runCd(3);
+        await runCd(10);
         const img = await shootOne();
         imgs.push(img);
         setSeriesProg(prev => { const n = [...prev]; n[i] = true; return n; });
