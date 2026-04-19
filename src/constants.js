@@ -2,7 +2,7 @@
 export const FORMATS = {
   strip_single: {
     id: 'strip_single', label: 'Strip ×1', group: 'strip',
-    cw: 400, ch: 1200,
+    cw: 600, ch: 1800,
     slots: [
       { x: 0.05, y: 0.020, w: 0.90, h: 0.225 },
       { x: 0.05, y: 0.265, w: 0.90, h: 0.225 },
@@ -12,21 +12,21 @@ export const FORMATS = {
   },
   strip_double: {
     id: 'strip_double', label: 'Strip ×2', group: 'strip',
-    cw: 820, ch: 1200,
+    cw: 1230, ch: 1800,
     slots: [
+      // Left strip — slots 0,1,2,3
       { x: 0.025, y: 0.020, w: 0.455, h: 0.225 },
       { x: 0.025, y: 0.265, w: 0.455, h: 0.225 },
       { x: 0.025, y: 0.510, w: 0.455, h: 0.225 },
       { x: 0.025, y: 0.755, w: 0.455, h: 0.225 },
-      { x: 0.520, y: 0.020, w: 0.455, h: 0.225 },
-      { x: 0.520, y: 0.265, w: 0.455, h: 0.225 },
-      { x: 0.520, y: 0.510, w: 0.455, h: 0.225 },
-      { x: 0.520, y: 0.755, w: 0.455, h: 0.225 },
     ],
+    // Mirror right side in the renderer — not extra slots
+    mirrorRight: true,
+    mirrorOffsetX: 0.495,
   },
   r4_grid: {
     id: 'r4_grid', label: '4R Grid', group: 'print',
-    cw: 600, ch: 900,
+    cw: 900, ch: 1350,
     slots: [
       { x: 0.04, y: 0.04, w: 0.44, h: 0.44 },
       { x: 0.52, y: 0.04, w: 0.44, h: 0.44 },
@@ -36,12 +36,12 @@ export const FORMATS = {
   },
   r4_single: {
     id: 'r4_single', label: '4R Single', group: 'print',
-    cw: 600, ch: 900,
+    cw: 900, ch: 1350,
     slots: [{ x: 0.04, y: 0.05, w: 0.92, h: 0.88 }],
   },
   square: {
     id: 'square', label: 'Square', group: 'social',
-    cw: 800, ch: 800,
+    cw: 1200, ch: 1200,
     slots: [
       { x: 0.03,  y: 0.03,  w: 0.455, h: 0.455 },
       { x: 0.515, y: 0.03,  w: 0.455, h: 0.455 },
@@ -51,7 +51,7 @@ export const FORMATS = {
   },
   wide: {
     id: 'wide', label: 'Wide', group: 'social',
-    cw: 1000, ch: 500,
+    cw: 1500, ch: 750,
     slots: [
       { x: 0.020, y: 0.08, w: 0.22, h: 0.84 },
       { x: 0.265, y: 0.08, w: 0.22, h: 0.84 },

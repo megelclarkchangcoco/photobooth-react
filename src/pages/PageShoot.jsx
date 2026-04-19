@@ -86,7 +86,7 @@ export function PageShoot({ session, onDone }) {
       const img = new Image();
       img.onload = () => res(img);
       img.onerror = () => rej(new Error('Frame failed'));
-      img.src = c.toDataURL('image/jpeg', 0.93);
+      img.src = c.toDataURL('image/png');
     });
   }
 
@@ -96,7 +96,7 @@ export function PageShoot({ session, onDone }) {
     if (photoCount >= slotCount) { alert('Strip full! Reset to start over.'); return; }
     setIsBusy(true);
     try {
-      await runCd(3);
+      await runCd(10);
       const img = await shootOne();
       session.addPhoto(img);
       if (photoCount + 1 >= slotCount) setTimeout(() => onDone(), 450);

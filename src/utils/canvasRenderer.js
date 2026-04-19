@@ -117,23 +117,29 @@ export function renderCanvas(ctx, { format, theme, bgImage, photos, adjustments,
   ctx.clearRect(0, 0, fmt.cw, fmt.ch);
   drawBg(ctx, fmt.cw, fmt.ch, theme, bgImage);
 
-  // Image layers behind photos
   (imageLayers || []).filter(l => l.zIndex === 'behind').forEach(l => drawImageLayer(ctx, l));
 
-  // Photo slots
   fmt.slots.forEach((_, i) => {
     const rect = getSlotRect(format, i);
     if (photos[i]) drawPhoto(ctx, photos[i], rect, adjustments[i] || { scale: 100, offsetX: 0, offsetY: 0, rotation: 0, brightness: 100 });
     else drawEmptySlot(ctx, rect, theme, i);
     if (i === selectedSlot) drawSelectionBorder(ctx, rect);
+
+    // Mirror right side for strip_double — photo order: 1,2,3,4 → 4,3,2,1
+    if (fmt.mirrorRight) {
+      const mirrorIndex = fmt.slots.length - 1 - i;
+      const mirrorRect = {
+        x: rect.x + fmt.cw * fmt.mirrorOffsetX,
+        y: rect.y,
+        w: rect.w,
+        h: rect.h,
+      };
+      if (photos[mirrorIndex]) drawPhoto(ctx, photos[mirrorIndex], mirrorRect, adjustments[mirrorIndex] || { scale: 100, offsetX: 0, offsetY: 0, rotation: 0, brightness: 100 });
+      else drawEmptySlot(ctx, mirrorRect, theme, mirrorIndex);
+    }
   });
 
-  // Stickers
   (stickers || []).forEach(s => drawStickerItem(ctx, s));
-
-  // Image layers on top
   (imageLayers || []).filter(l => l.zIndex !== 'behind').forEach(l => drawImageLayer(ctx, l));
-
-  // Text
   (textLayers || []).forEach(l => drawTextLayer(ctx, l));
 }
